@@ -1,21 +1,19 @@
 cmake_minimum_required(VERSION 3.2)
 
-#project(cpp1 VERSION 0.0."$ENV{TRAVIS_BUILD_NUMBER}")
 project(cpp1 VERSION 0.0.0)
-
 set(PROJECT_VERSION_PATCH "$ENV{TRAVIS_BUILD_NUMBER}")
 
 find_package(Boost COMPONENTS unit_test_framework REQUIRED)
 
 configure_file(version.h.in ${PROJECT_SOURCE_DIR}/version.h)
 
-add_executable(cpp1_cli main.cpp)
+add_executable(helloworld main.cpp)
 
 add_library(cpp1_mylib lib.cpp)
 
 add_executable(test_version test_version.cpp)
 
-set_target_properties(cpp1_cli cpp1_mylib test_version PROPERTIES
+set_target_properties(helloworld cpp1_mylib test_version PROPERTIES
     CXX_STANDARD 17
     CXX_STANDARD_REQUIRED ON
     COMPILE_OPTIONS "-Wpedantic;-Wall;-Wextra"
@@ -26,7 +24,7 @@ set_target_properties(test_version PROPERTIES
     INCLUDE_DIRECTORIES ${Boost_INCLUDE_DIR}
 )
 
-target_link_libraries(cpp1_cli
+target_link_libraries(helloworld
     cpp1_mylib
 )
 
@@ -35,7 +33,7 @@ target_link_libraries(test_version
     cpp1_mylib
 )
 
-install(TARGETS cpp1_cli RUNTIME DESTINATION bin)
+install(TARGETS helloworld RUNTIME DESTINATION bin)
 
 set(CPACK_GENERATOR DEB)
 

@@ -4,9 +4,6 @@
 
 int main()
 {
-    // auto logger = spdlog::stdout_logger_mt("console");
-    // logger->info("version {} was started", version());
-
     using namespace std;
 
     cout<< "build " << mylib::version() << "\n";
